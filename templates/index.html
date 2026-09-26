@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3 border">
+  <h1 class="display-6 fw-bold">Análisis exploratorio de población</h1>
+  <p class="col-md-9 fs-5 text-secondary">
+    Aplicación desarrollada con Flask y Bootstrap para explorar un conjunto de datos
+    del Portal Nacional de Datos Abiertos de Colombia a través de cuatro dimensiones:
+    poblacional, territorial, temporal y relacional/multivariada.
+  </p>
+
+  {% if not dataset_ok %}
+  <div class="alert alert-warning">
+    <i class="bi bi-exclamation-triangle-fill me-1"></i>
+    Aún no se ha cargado el conjunto de datos. Copia el archivo en <code>/data</code>
+    y actualiza <code>config.py</code>.
+  </div>
+  {% else %}
+  <div class="alert alert-success">
+    <i class="bi bi-check-circle-fill me-1"></i>
+    Dataset cargado correctamente &middot; <strong>{{ "{:,}".format(total_registros) }}</strong> registros disponibles.
+  </div>
+  {% endif %}
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-md-6">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Ficha del conjunto de datos</h5>
+        <ul class="list-unstyled small mb-0">
+          <li><strong>Nombre:</strong> {{ dataset_info.nombre }}</li>
+          <li><strong>Tema:</strong> {{ dataset_info.tema }}</li>
+          <li><strong>Población estudiada:</strong> {{ dataset_info.poblacion }}</li>
+          <li><strong>Entidad que publica:</strong> {{ dataset_info.entidad }}</li>
+          <li><strong>URL original:</strong> <a href="{{ dataset_info.url_original }}" target="_blank" rel="noopener">{{ dataset_info.url_original }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Dimensiones del análisis</h5>
+        <div class="list-group list-group-flush">
+          <a href="{{ url_for('poblacional') }}" class="list-group-item list-group-item-action">
+            <i class="bi bi-people-fill me-2"></i>Dimensión poblacional
+          </a>
+          <a href="{{ url_for('territorial') }}" class="list-group-item list-group-item-action">
+            <i class="bi bi-geo-alt-fill me-2"></i>Dimensión territorial
+          </a>
+          <a href="{{ url_for('temporal') }}" class="list-group-item list-group-item-action">
+            <i class="bi bi-calendar3 me-2"></i>Dimensión temporal
+          </a>
+          <a href="{{ url_for('multivariada') }}" class="list-group-item list-group-item-action">
+            <i class="bi bi-diagram-3-fill me-2"></i>Dimensión relacional y multivariada
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

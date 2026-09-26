@@ -1,0 +1,18 @@
+# render.yaml
+# Blueprint de Render. Permite crear el servicio automáticamente con
+# "New +" -> "Blueprint" en render.com, apuntando a este repositorio.
+# También se puede crear el servicio manualmente como "Web Service" sin usar
+# este archivo; en ese caso solo se necesitan el build/start command de abajo.
+
+services:
+  - type: web
+    name: analisis-poblacion
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: FLASK_DEBUG
+        value: "0"
