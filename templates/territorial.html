@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% import "macros.html" as m %}
+{% block title %}Dimensión territorial{% endblock %}
+
+{% block content %}
+<h2 class="mb-1"><i class="bi bi-geo-alt-fill text-primary me-2"></i>Dimensión territorial</h2>
+<p class="text-secondary mb-4">
+  ¿Cómo se distribuye la población y sus principales características entre los territorios disponibles?
+  <br><span class="small">Responsable: Integrante 2</span>
+</p>
+
+<form method="get" class="row g-3 align-items-end mb-4 p-3 bg-light rounded-3 border">
+  {{ m.select_filter("territorio", "Territorio", opciones_territorio, filtro_territorio) }}
+  <div class="col-sm-6 col-md-4">
+    <label class="form-label small fw-semibold">Año / periodo</label>
+    <input type="text" name="periodo" value="{{ filtro_periodo }}" placeholder="Ej: 2023" class="form-control">
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-funnel-fill me-1"></i> Filtrar
+    </button>
+    <span class="text-secondary small ms-2">{{ "{:,}".format(registros_filtrados) }} registros</span>
+  </div>
+</form>
+
+{{ m.kpi_row(kpis) }}
+
+<div class="row">
+  <div class="col-lg-6">{{ m.chart_card("Registros por territorio (top 15)", grafico_1) }}</div>
+  <div class="col-lg-6">{{ m.chart_card("Concentración territorial", grafico_2) }}</div>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Interpretación y conocimientos evidentes</h5>
+    <p class="text-muted mb-2">
+      Completar aquí, por cada conocimiento evidente: Pregunta, Variables, Procedimiento,
+      Evidencia, Hallazgo, Interpretación, Utilidad y Limitación.
+    </p>
+    <ol class="mb-0">
+      <li>Conocimiento evidente 1 — <span class="text-muted">pendiente de redactar</span></li>
+      <li>Conocimiento evidente 2 — <span class="text-muted">pendiente de redactar</span></li>
+      <li>Conocimiento evidente 3 — <span class="text-muted">pendiente de redactar</span></li>
+    </ol>
+  </div>
+</div>
+{% endblock %}

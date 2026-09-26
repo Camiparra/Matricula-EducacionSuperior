@@ -1,0 +1,21 @@
+/* static/css/style.css */
+
+body {
+  background-color: #f7f8fa;
+}
+
+.kpi-card {
+  border-left: 4px solid #0d6efd;
+}
+
+.navbar-brand i {
+  color: #6ea8fe;
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+footer a {
+  color: inherit;
+}

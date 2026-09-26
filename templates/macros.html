@@ -1,0 +1,40 @@
+{# macros.html: piezas de interfaz reutilizadas por las 4 plantillas de dimensión #}
+
+{% macro kpi_row(kpis) %}
+<div class="row g-3 mb-4">
+  {% for kpi in kpis %}
+  <div class="col-md-4">
+    <div class="card kpi-card h-100 shadow-sm">
+      <div class="card-body">
+        <div class="text-uppercase text-secondary small fw-semibold">{{ kpi.titulo }}</div>
+        <div class="fs-3 fw-bold">{{ kpi.valor }}</div>
+        <div class="text-muted small">{{ kpi.detalle }}</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+
+{% macro select_filter(nombre, etiqueta, opciones, valor_actual) %}
+<div class="col-sm-6 col-md-4">
+  <label class="form-label small fw-semibold">{{ etiqueta }}</label>
+  <select name="{{ nombre }}" class="form-select" onchange="this.form.submit()">
+    <option value="">Todos</option>
+    {% for opcion in opciones %}
+    <option value="{{ opcion }}" {% if opcion == valor_actual %}selected{% endif %}>{{ opcion }}</option>
+    {% endfor %}
+  </select>
+</div>
+{% endmacro %}
+
+
+{% macro chart_card(titulo, grafico_html) %}
+<div class="card shadow-sm mb-4">
+  <div class="card-header bg-white fw-semibold">{{ titulo }}</div>
+  <div class="card-body">
+    {{ grafico_html | safe }}
+  </div>
+</div>
+{% endmacro %}
